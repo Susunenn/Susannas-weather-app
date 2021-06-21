@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SheCodes HW6</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <link href="src/styles.css" rel="stylesheet" />
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-3">
+          <h1>How's the weather in...?</h1>
+        </div>
+        <div class="col-3">
+          <form class="what-city" id="cities">
+            <div class="mb-3">
+              <label for="location" class="form-label"></label>
+              <input
+                type="location"
+                class="form-control"
+                id="whatcity"
+                placeholder="What city?"
+              />
+            </div>
+        </div>
+        <div class="col-3">
+            <button type="search" class="search-button">🔍</button>
+          </div>
+      </form>
+
+        <div class="col-3">
+            <button type="search" class="current-location-button">📍</button>
+          </div>
+        
+      </div>
+
+        <div class="containers">
+          <div class="row">
+            <h2>Right now</h2>
+            <div class="col-4">
+              <div class="weather-degrees">
+                  <span class="weather-now">☂️ </span>
+                  <span class="weather-now" id="numberDegrees">12</span>
+                   
+                      <span> 
+                        <a href="#" id="celcius" class="degrees"> °C </a>|
+                        <a href="#" id="fahrenheit" class="degrees"> °F</a>
+                      </span>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <p>
+                💨Wind 3m/s <br />
+                💧Humidity 40%
+              </p>
+              <br />
+              <div class="row">
+                <div class="col-6">
+                  <p>
+                    Sunrise <br />
+                    5:35am
+                  </p>
+                </div>
+                <div class="col-6">
+                  <p>
+                    Sunset <br />
+                    8:47am
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <p class="location" id="current-city">
+                Edinburgh <br />
+                Scotland, UK <br />
+              </p>
+
+              <p class="date" id="current-day">
+                📆 Sunday
+              </p>
+              <p class="date" id="current-hour">
+                🕰️ 22:30
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="containers">
+          <h3>Later today</h3>
+          <div class="row">
+            <div class="col-1">
+              12am <br />
+              ☂️ <br />
+              9°
+            </div>
+            <div class="col-1">
+              2am<br />
+              ☂️ <br />
+              9°
+            </div>
+            <div class="col-1">
+              4am<br />
+              ☂️ <br />
+              9°
+            </div>
+            <div class="col-1">
+              6am<br />
+              ☂️ <br />
+              9°
+            </div>
+            <div class="col-1">
+              8am<br />
+              ☂️ <br />
+              9°
+            </div>
+            <div class="col-1">
+              10am<br />
+              ☂️ <br />
+              9°
+            </div>
+            <div class="col-1">
+              12pm<br />
+              ☂️ <br />
+              9°
+            </div>
+            <div class="col-1">
+              2pm<br />
+              ☂️ <br />
+              9°
+            </div>
+            <div class="col-1">
+              4pm<br />
+              ☂️ <br />
+              9°
+            </div>
+            <div class="col-1">
+              6pm<br />
+              ☂️ <br />
+              9°
+            </div>
+            <div class="col-1">
+              8pm<br />
+              ☂️ <br />
+              9°
+            </div>
+            <div class="col-1">
+              10pm<br />
+              ☂️ <br />
+              9°
+            </div>
+          </div>
+        </div>
+      
+
+      <div class="containers">
+        <h4>Upcoming week</h4>
+        <div class="row">
+          <div class="col-2">
+            Mon <br />
+            ☂️ <br />
+            9° | 3°
+          </div>
+          <div class="col-2">
+            Tue <br />
+            ☂️ <br />
+            9° | 3°
+          </div>
+          <div class="col-2">
+            Wed <br />
+            ☂️ <br />
+            9° | 3°
+          </div>
+          <div class="col-2">
+            Thu <br />
+            ☂️ <br />
+            9° | 3°
+          </div>
+          <div class="col-2">
+            Fri <br />
+            ☂️ <br />
+            9° | 3°
+          </div>
+          <div class="col-2">
+            Sat <br />
+            ☂️ <br />
+            9° | 3°
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+     <script src="src/index.js"></script>
+  </body>
+</html>
+
