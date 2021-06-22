@@ -95,3 +95,9 @@ h4 {
   background-color: red;
   border-radius: 7px;
 }
+
+.open-source-link {
+  font-family: monospace;
+  font-size: 10px;
+  
+}
