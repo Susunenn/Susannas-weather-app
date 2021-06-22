@@ -26,6 +26,11 @@ h4 {
   margin: 0 auto;
 }
 
+.big-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 .container {
   border: solid salmon 3px;
   font-family: monospace;
@@ -99,5 +104,4 @@ h4 {
 .open-source-link {
   font-family: monospace;
   font-size: 10px;
-  
 }
