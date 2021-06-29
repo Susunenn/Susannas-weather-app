@@ -67,6 +67,14 @@ function searchCityLocation(event) {
     let weatherDescription = response.data.weather[0].description;
     let weatherDescriptionElement = document.querySelector("#description");
     weatherDescriptionElement.innerHTML = `${weatherDescription}`;
+
+    let humidity = response.data.main.humidity;
+    let humidityElement = document.querySelector("#humidity");
+    humidityElement.innerHTML = `${humidity}`;
+
+    let wind = Math.round(response.data.wind.speed);
+    let windElement = document.querySelector("#wind");
+    windElement.innerHTML = `${wind}`;
   }
   axios.get(apiUrl).then(searchLocation);
 }
@@ -90,6 +98,14 @@ function searchingCurrentLocation() {
     let currentWeatherDescriptionElement =
       document.querySelector("#description");
     currentWeatherDescriptionElement.innerHTML = `${currentWeatherDescription}`;
+
+    let currentHumidity = response.data.main.humidity;
+    let currentHumidityElement = document.querySelector("#humidity");
+    currentHumidityElement.innerHTML = `${currentHumidity}`;
+
+    let currentWind = Math.round(response.data.wind.speed);
+    let currentWindElement = document.querySelector("#wind");
+    currentWindElement.innerHTML = `${currentWind}`;
   }
   function showLocationTemperature(position) {
     let latitude = position.coords.latitude;
