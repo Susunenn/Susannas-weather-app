@@ -64,6 +64,10 @@ function searchCityLocation(event) {
 
     let cityTemperature = document.querySelector("#numberDegrees");
     cityTemperature.innerHTML = `${temperature}`;
+
+    let weatherDescription = response.data.weather[0].description;
+    let weatherDescriptionElement = document.querySelector("#description");
+    weatherDescriptionElement.innerHTML = `${weatherDescription}`;
   }
   axios.get(apiUrl).then(searchLocation);
 }
