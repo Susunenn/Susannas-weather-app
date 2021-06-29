@@ -61,7 +61,6 @@ function searchCityLocation(event) {
 
   function searchLocation(response) {
     let temperature = Math.round(response.data.main.temp);
-
     let cityTemperature = document.querySelector("#numberDegrees");
     cityTemperature.innerHTML = `${temperature}`;
 
@@ -79,11 +78,18 @@ searchCity.addEventListener("submit", searchCityLocation);
 
 function searchingCurrentLocation() {
   function searchCurrentLocation(response) {
-    let currentTemperature = Math.round(response.data.main.temp);
     let currentCityLocation = document.querySelector("#current-city");
     currentCityLocation.innerHTML = `${response.data.name}`;
+
+    let currentTemperature = Math.round(response.data.main.temp);
+
     let currentLocationTemperature = document.querySelector("#numberDegrees");
     currentLocationTemperature.innerHTML = `${currentTemperature}`;
+
+    let currentWeatherDescription = response.data.weather[0].description;
+    let currentWeatherDescriptionElement =
+      document.querySelector("#description");
+    currentWeatherDescriptionElement.innerHTML = `${currentWeatherDescription}`;
   }
   function showLocationTemperature(position) {
     let latitude = position.coords.latitude;
