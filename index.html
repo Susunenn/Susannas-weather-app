@@ -24,17 +24,21 @@
         </div>
         <div class="col-6">
           <form class="what-city" id="cities">
-            <div class="mb-3">
-              <label for="location" class="form-label"></label>
-              <input
-                type="location"
-                class="form-control"
-                id="whatcity"
-                placeholder="What city?"
-              />
-             <button type="search" class="search-button">🔍</button>
-             <button type="search" class="current-location-button">📍</button>
-            </div>
+            <div class="row">
+              <div class="col-9">
+                  <label for="location" class="form-label"></label>
+                  <input
+                    type="location"
+                    class="form-control"
+                    id="whatcity"
+                    placeholder="What city?"
+                  />
+                </div>
+                <div class="col-3">
+                  <button type="search" class="search-button">🔍</button>
+                  <button type="search" class="current-location-button">📍</button>
+                </div>
+              </div>
           </form>
         </div>
 
@@ -49,7 +53,7 @@
                   <a href="#" id="celcius" class="degrees">°C </a>|
                   <a href="#" id="fahrenheit" class="degrees">°F</a>
                 </span>
-                <div id="description">Rainy</div>
+                <div id="description" class="weather-description">Rainy</div>
               </div>
             </div>
 

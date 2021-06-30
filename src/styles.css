@@ -82,8 +82,8 @@ ul {
   color: white;
 }
 
-.mb-3 {
-  max-width: 250px;
+.weather-description {
+  margin-top: -10px;
 }
 
 .location {
@@ -118,6 +118,8 @@ ul {
 .current-location-button {
   background-color: blue;
   border-radius: 7px;
+  position: absolute;
+  margin-left: 5px;
 }
 
 .search-button {
