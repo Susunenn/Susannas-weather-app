@@ -21,7 +21,7 @@ fDegree.addEventListener("click", changeFahrenheit);
 let now = new Date();
 
 function currentTime() {
-  let time = `🕰️ ${now.getHours()}:${
+  let time = `${now.getHours()}:${
     (now.getMinutes() < 10 ? "0" : "") + now.getMinutes()
   }`;
   return time;
@@ -40,7 +40,7 @@ function currentToday() {
     "Saturday",
   ];
   let day = days[now.getDay()];
-  let date = `📆 ${day}`;
+  let date = `${day}`;
   return date;
 }
 
@@ -56,40 +56,54 @@ function searchCityLocation(event) {
   let cityInput = document.querySelector("#whatcity");
 
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&appid=${apiKey}&units=metric`;
+  //let apiHourlyUrl = `https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${cityInput.value}&appid=${apiKey}&units=metric`;
 
   function searchLocation(response) {
     let searchedCityName = document.querySelector("#current-city");
     searchedCityName.innerHTML = `${response.data.name}, ${response.data.sys.country}`;
 
-    let temperature = Math.round(response.data.main.temp);
     let cityTemperature = document.querySelector("#numberDegrees");
-    cityTemperature.innerHTML = `${temperature}`;
+    cityTemperature.innerHTML = `${Math.round(response.data.main.temp)}`;
 
-    let weatherDescription = response.data.weather[0].description;
     let weatherDescriptionElement = document.querySelector("#description");
-    weatherDescriptionElement.innerHTML = `${weatherDescription}`;
+    weatherDescriptionElement.innerHTML = `${response.data.weather[0].description}`;
 
-    let humidity = response.data.main.humidity;
     let humidityElement = document.querySelector("#humidity");
-    humidityElement.innerHTML = `${humidity}`;
+    humidityElement.innerHTML = `${response.data.main.humidity}`;
 
-    let wind = Math.round(response.data.wind.speed);
     let windElement = document.querySelector("#wind");
-    windElement.innerHTML = `${wind}`;
+    windElement.innerHTML = `${Math.round(response.data.wind.speed)}`;
 
-    let feelsLike = Math.round(response.data.main.feels_like);
     let feelsLikeElement = document.querySelector("#feels-like");
-    feelsLikeElement.innerHTML = `${feelsLike}`;
+    feelsLikeElement.innerHTML = `${Math.round(response.data.main.feels_like)}`;
 
-    let sunrise = response.data.sys.sunrise;
+    //Fix sunset/sunrise time
+
     let sunriseElement = document.querySelector("#sunrise");
-    sunriseElement.innerHTML = `${sunrise}`;
+    sunriseElement.innerHTML = `${response.data.sys.sunrise}`;
 
-    let sunset = response.data.sys.sunset;
     let sunsetElement = document.querySelector("#sunset");
-    sunsetElement.innerHTML = `${sunset}`;
+    sunsetElement.innerHTML = `${response.data.sys.sunset}`;
+
+    //Add current day & time in specific location
+
+    //let dateElement = document.querySelector("#current-day");
+    //dateElement.innerHTML = `${currentDay()}`;
+
+    //let timeElement = document.querySelector("#current-hour");
+    //timeElement.innerHTML = currentTime(response.data.dt * 1000);
+
+    //Weather icon
+
+    let weatherIcons = document.querySelector("#weather-icon");
+    weatherIcons.setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+    weatherIcons.setAttribute("alt", response.data.weather[0].description);
   }
   axios.get(apiUrl).then(searchLocation);
+  //axios.get(apiHourlyUrl).then(searchLocation);
 }
 
 let searchCity = document.querySelector("#cities");
@@ -102,36 +116,43 @@ function searchingCurrentLocation() {
     let currentCityLocation = document.querySelector("#current-city");
     currentCityLocation.innerHTML = `${response.data.name}, ${response.data.sys.country}`;
 
-    let currentTemperature = Math.round(response.data.main.temp);
-
     let currentLocationTemperature = document.querySelector("#numberDegrees");
-    currentLocationTemperature.innerHTML = `${currentTemperature}`;
+    currentLocationTemperature.innerHTML = `${Math.round(
+      response.data.main.temp
+    )}`;
 
-    let currentWeatherDescription = response.data.weather[0].description;
     let currentWeatherDescriptionElement =
       document.querySelector("#description");
-    currentWeatherDescriptionElement.innerHTML = `${currentWeatherDescription}`;
+    currentWeatherDescriptionElement.innerHTML = `${response.data.weather[0].description}`;
 
-    let currentHumidity = response.data.main.humidity;
     let currentHumidityElement = document.querySelector("#humidity");
-    currentHumidityElement.innerHTML = `${currentHumidity}`;
+    currentHumidityElement.innerHTML = `${response.data.main.humidity}`;
 
-    let currentWind = Math.round(response.data.wind.speed);
     let currentWindElement = document.querySelector("#wind");
-    currentWindElement.innerHTML = `${currentWind}`;
+    currentWindElement.innerHTML = `${Math.round(response.data.wind.speed)}`;
 
-    let currentFeelsLike = Math.round(response.data.main.feels_like);
     let currentFeelsLikeElement = document.querySelector("#feels-like");
-    currentFeelsLikeElement.innerHTML = `${currentFeelsLike}`;
+    currentFeelsLikeElement.innerHTML = `${Math.round(
+      response.data.main.feels_like
+    )}`;
 
-    let currentSunrise = response.data.sys.sunrise;
     let currentSunriseElement = document.querySelector("#sunrise");
-    currentSunriseElement.innerHTML = `${currentSunrise}`;
+    currentSunriseElement.innerHTML = `${response.data.sys.sunrise}`;
 
-    let currentSunset = response.data.sys.sunset;
     let currentSunsetElement = document.querySelector("#sunset");
-    currentSunsetElement.innerHTML = `${currentSunset}`;
+    currentSunsetElement.innerHTML = `${response.data.sys.sunset}`;
+
+    let currentWeatherIcons = document.querySelector("#weather-icon");
+    currentWeatherIcons.setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+    currentWeatherIcons.setAttribute(
+      "alt",
+      response.data.weather[0].description
+    );
   }
+
   function showLocationTemperature(position) {
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
@@ -145,3 +166,7 @@ function searchingCurrentLocation() {
 
 let currentLocation = document.querySelector(".current-location-button");
 currentLocation.addEventListener("click", searchingCurrentLocation);
+
+//Add Later today element
+
+//Add Upcoming week element

@@ -43,7 +43,7 @@
             <h2>Right now</h2>
             <div class="col-4">
               <div class="weather-degrees">
-                <span class="weather-now">☂️</span>
+                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather-icons" id="weather-icon"></img>
                 <span class="weather-now" id="numberDegrees">12</span>
                 <span class="line"> 
                   <a href="#" id="celcius" class="degrees">°C </a>|
@@ -79,15 +79,15 @@
             <div class="col-4">
               <p class="location" id="current-city">
                 Edinburgh <br />
-                Scotland, UK <br />
+                GB <br />
               </p>
 
               <ul>
-                <li class="date" id="current-day">
-                  📆 Sunday
+                <li class="date">
+                  📆 <span id="current-day"></span>
                 </li>
-                <li class="date" id="current-hour">
-                  🕰️ 22:30
+                <li class="date">
+                  🕰️ <span id="current-hour"></span>
                 </li>
               </ul>
             </div>
