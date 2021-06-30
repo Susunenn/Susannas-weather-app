@@ -65,15 +65,21 @@ ul {
   text-align: left;
 }
 
-.units {
-  font-size: 15px;
+.line {
+  font-size: 19px;
   position: relative;
   top: -15px;
+  color: salmon;
 }
 
 .degrees {
   text-decoration: none;
-  font-size: 17px;
+  font-size: 19px;
+  color: salmon;
+}
+
+.degrees:hover {
+  color: white;
 }
 
 .mb-3 {
@@ -119,9 +125,18 @@ ul {
   border-radius: 7px;
 }
 
-.open-source-link {
+.open-source {
   font-family: monospace;
   font-size: 12px;
   padding-top: 5px;
   margin-bottom: 0;
+}
+
+.open-source-links {
+  text-decoration: none;
+  color: salmon;
+}
+
+.open-source-links:hover {
+  color: white;
 }
