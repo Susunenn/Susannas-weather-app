@@ -54,12 +54,13 @@ let apiKey = "afacbafb576509c320fcd30e6a25dc9d";
 function searchCityLocation(event) {
   event.preventDefault();
   let cityInput = document.querySelector("#whatcity");
-  let searchedCity = document.querySelector("#current-city");
-  searchedCity.innerHTML = `${cityInput.value}`;
 
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&appid=${apiKey}&units=metric`;
 
   function searchLocation(response) {
+    let searchedCityName = document.querySelector("#current-city");
+    searchedCityName.innerHTML = `${response.data.name}, ${response.data.sys.country}`;
+
     let temperature = Math.round(response.data.main.temp);
     let cityTemperature = document.querySelector("#numberDegrees");
     cityTemperature.innerHTML = `${temperature}`;
@@ -75,6 +76,10 @@ function searchCityLocation(event) {
     let wind = Math.round(response.data.wind.speed);
     let windElement = document.querySelector("#wind");
     windElement.innerHTML = `${wind}`;
+
+    let feelsLike = Math.round(response.data.main.feels_like);
+    let feelsLikeElement = document.querySelector("#feels-like");
+    feelsLikeElement.innerHTML = `${feelsLike}`;
 
     let sunrise = response.data.sys.sunrise;
     let sunriseElement = document.querySelector("#sunrise");
@@ -95,7 +100,7 @@ searchCity.addEventListener("submit", searchCityLocation);
 function searchingCurrentLocation() {
   function searchCurrentLocation(response) {
     let currentCityLocation = document.querySelector("#current-city");
-    currentCityLocation.innerHTML = `${response.data.name}`;
+    currentCityLocation.innerHTML = `${response.data.name}, ${response.data.sys.country}`;
 
     let currentTemperature = Math.round(response.data.main.temp);
 
@@ -114,6 +119,10 @@ function searchingCurrentLocation() {
     let currentWind = Math.round(response.data.wind.speed);
     let currentWindElement = document.querySelector("#wind");
     currentWindElement.innerHTML = `${currentWind}`;
+
+    let currentFeelsLike = Math.round(response.data.main.feels_like);
+    let currentFeelsLikeElement = document.querySelector("#feels-like");
+    currentFeelsLikeElement.innerHTML = `${currentFeelsLike}`;
 
     let currentSunrise = response.data.sys.sunrise;
     let currentSunriseElement = document.querySelector("#sunrise");
