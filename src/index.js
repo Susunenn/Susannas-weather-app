@@ -100,10 +100,10 @@ function searchingCurrentLocation() {
     let currentCityLocation = document.querySelector("#current-city");
     currentCityLocation.innerHTML = `${response.data.name}, ${response.data.sys.country}`;
 
+    celsius = response.data.main.temp;
+
     let currentLocationTemperature = document.querySelector("#numberDegrees");
-    currentLocationTemperature.innerHTML = `${Math.round(
-      response.data.main.temp
-    )}`;
+    currentLocationTemperature.innerHTML = `${Math.round(celsius)}`;
 
     let currentWeatherDescriptionElement =
       document.querySelector("#description");
@@ -135,6 +135,7 @@ function searchingCurrentLocation() {
       "alt",
       response.data.weather[0].description
     );
+    console.log(response.data);
   }
 
   function showLocationTemperature(position) {
