@@ -72,13 +72,18 @@ ul {
   color: salmon;
 }
 
-.degrees {
+a.celsius {
+  color: #212529;
   text-decoration: none;
-  font-size: 17px;
-  color: salmon;
+  cursor: default;
 }
 
-.degrees:hover {
+a.fahrenheit {
+  color: salmon;
+  text-decoration: none;
+}
+
+a.fahrenheit:hover {
   color: white;
 }
 

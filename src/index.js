@@ -1,21 +1,3 @@
-//Celsius & Fahrenheit
-
-function changeCelcius(event) {
-  event.preventDefault();
-  let celciusDegrees = document.querySelector("#numberDegrees");
-  celciusDegrees.innerHTML = 15;
-}
-let cDegree = document.querySelector("#celcius");
-cDegree.addEventListener("click", changeCelcius);
-
-function changeFahrenheit(event) {
-  event.preventDefault();
-  let fahrenheitDegrees = document.querySelector("#numberDegrees");
-  fahrenheitDegrees.innerHTML = 35;
-}
-let fDegree = document.querySelector("#fahrenheit");
-fDegree.addEventListener("click", changeFahrenheit);
-
 //Time and Day
 
 let now = new Date();
@@ -62,8 +44,10 @@ function searchCityLocation(event) {
     let searchedCityName = document.querySelector("#current-city");
     searchedCityName.innerHTML = `${response.data.name}, ${response.data.sys.country}`;
 
+    celsius = response.data.main.temp;
+
     let cityTemperature = document.querySelector("#numberDegrees");
-    cityTemperature.innerHTML = `${Math.round(response.data.main.temp)}`;
+    cityTemperature.innerHTML = `${Math.round(celsius)}`;
 
     let weatherDescriptionElement = document.querySelector("#description");
     weatherDescriptionElement.innerHTML = `${response.data.weather[0].description}`;
@@ -166,6 +150,36 @@ function searchingCurrentLocation() {
 
 let currentLocation = document.querySelector(".current-location-button");
 currentLocation.addEventListener("click", searchingCurrentLocation);
+
+//Units
+function showFahrenheit(event) {
+  event.preventDefault();
+  let degreeUnits = document.querySelector("#numberDegrees");
+  celsiusLink.classList.remove("celsius");
+  celsiusLink.classList.add("fahrenheit");
+  fahrenheitLink.classList.remove("fahrenheit");
+  fahrenheitLink.classList.add("celsius");
+  let fahrenheitTemperature = (celsius * 9) / 5 + 32;
+  degreeUnits.innerHTML = Math.round(fahrenheitTemperature);
+}
+
+function showCelsius(event) {
+  event.preventDefault();
+  let degreeUnits = document.querySelector("#numberDegrees");
+  celsiusLink.classList.add("celsius");
+  celsiusLink.classList.remove("fahrenheit");
+  fahrenheitLink.classList.remove("celsius");
+  fahrenheitLink.classList.add("fahrenheit");
+  degreeUnits.innerHTML = Math.round(celsius);
+}
+
+let celsius = null;
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", showFahrenheit);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", showCelsius);
 
 //Add Later today element
 
