@@ -135,7 +135,9 @@ function searchingCurrentLocation() {
       "alt",
       response.data.weather[0].description
     );
-    console.log(response.data);
+    
+    //Add correct time
+    console.log(response.data.dt);
   }
 
   function showLocationTemperature(position) {
