@@ -132,6 +132,28 @@ a.fahrenheit:hover {
   border-radius: 7px;
 }
 
+.later-weather-icon {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.forecast-date {
+  font-size: 18px;
+}
+
+.forecast-icon {
+  font-size: 16px;
+}
+
+.forecast-temperature {
+  font-size: 16px;
+}
+
+.low-temp {
+  font-size: 16px;
+  color: #2125298e;
+}
+
 .open-source {
   font-family: monospace;
   font-size: 12px;
