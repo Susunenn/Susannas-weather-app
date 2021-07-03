@@ -163,6 +163,8 @@ function searchingCurrentLocation() {
       response.data.weather[0].description
     );
 
+    showWeatherForecast();
+
     //Add correct time
     console.log(response.data.dt);
   }
