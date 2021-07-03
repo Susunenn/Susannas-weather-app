@@ -137,16 +137,24 @@ a.fahrenheit:hover {
   max-width: 100%;
 }
 
+.row.forecast {
+  max-width: 98%;
+  margin-left: 7px;
+}
+
 .forecast-date {
   font-size: 18px;
+  max-width: 98%;
 }
 
 .forecast-icon {
-  font-size: 16px;
+  width: 70px;
+  max-width: 98%;
 }
 
 .forecast-temperature {
   font-size: 16px;
+  max-width: 98%;
 }
 
 .low-temp {

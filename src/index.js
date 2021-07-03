@@ -29,6 +29,31 @@ function currentToday() {
 let currentDay = document.querySelector("#current-day");
 currentDay.innerHTML = `${currentToday()}`;
 
+//Later this week
+function showWeatherForecast() {
+  let forecastElement = document.querySelector("#weatherForecast");
+  let forecastHTML = `<div class="row forecast">`;
+  let forecastDays = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+  ];
+  forecastDays.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<ul class="col-2">
+        <li class="forecast-date forecast-slot">${day}</li>
+        <li class="forecast-slot"><img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather-icons" id="weather-icon" class="forecast-icon"></img></li>    
+        <li class="forecast-temperature forecast-slot">9° | <small class="low-temp">3°</small></li>  
+      </ul>`;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 //Search button
 
 let apiKey = "afacbafb576509c320fcd30e6a25dc9d";
@@ -85,6 +110,8 @@ function searchCityLocation(event) {
       `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     );
     weatherIcons.setAttribute("alt", response.data.weather[0].description);
+
+    showWeatherForecast();
   }
   axios.get(apiUrl).then(searchLocation);
   //axios.get(apiHourlyUrl).then(searchLocation);
@@ -135,7 +162,7 @@ function searchingCurrentLocation() {
       "alt",
       response.data.weather[0].description
     );
-    
+
     //Add correct time
     console.log(response.data.dt);
   }
