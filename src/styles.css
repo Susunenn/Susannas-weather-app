@@ -109,15 +109,19 @@ a.fahrenheit:hover {
 .col-2 {
   border: solid salmon 1px;
   border-radius: 2px;
-  padding: 0;
   max-width: 110px;
+  padding: 0;
   display: block;
-  margin: 0 auto;
   background-color: rgba(255, 194, 203, 0.664);
+  margin: auto;
 }
 
 .col-4 {
   margin: auto;
+}
+
+.col-9 {
+  display: flex;
 }
 
 .current-location-button {
@@ -137,9 +141,8 @@ a.fahrenheit:hover {
   max-width: 100%;
 }
 
-.row.forecast {
-  max-width: 98%;
-  margin-left: 7px;
+.weather-forecast-box {
+  margin: auto;
 }
 
 .forecast-date {
