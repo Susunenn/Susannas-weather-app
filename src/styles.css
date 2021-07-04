@@ -30,7 +30,7 @@ ul {
 }
 
 .page {
-  background-color: rgba(255, 217, 213, 0.753);
+  background-color: rgba(255, 205, 214, 0.466);
 }
 
 .big-container {
@@ -39,10 +39,10 @@ ul {
 }
 
 .container {
-  border: solid salmon 3px;
+  border: solid rgb(255, 152, 141) 3px;
   font-family: monospace;
   max-width: 800px;
-  background-color: rgba(255, 194, 203, 0.664);
+  background-color: rgba(255, 205, 214, 0.788);
   border-radius: 15px;
   padding: 15px;
   margin: 0 auto;
@@ -70,7 +70,7 @@ ul {
 
 .search-button:hover,
 .current-location-button:hover {
-  background-color: rgb(253, 188, 181);
+  background-color: rgba(255, 219, 224, 0.856);
   transition: all 200ms ease-in-out;
 }
 
@@ -135,8 +135,8 @@ a.fahrenheit:hover {
 }
 
 .today-container {
-  border: solid pink 2px;
-  background-color: rgba(248, 227, 230, 0.856);
+  border: solid rgb(253, 181, 193) 2px;
+  background-color: rgba(255, 219, 224, 0.856);
   text-align: center;
   border-radius: 5px;
   display: block;
@@ -147,8 +147,8 @@ a.fahrenheit:hover {
 }
 
 .week-container {
-  border: solid pink 2px;
-  background-color: rgba(248, 227, 230, 0.856);
+  border: solid rgb(253, 181, 193) 2px;
+  background-color: rgba(255, 219, 224, 0.856);
   text-align: center;
   border-radius: 5px;
   display: block;
@@ -165,7 +165,7 @@ a.fahrenheit:hover {
 
 .col-2 {
   border: solid salmon 1px;
-  border-radius: 4px;
+  border-radius: 6px;
   max-width: 110px;
   padding: 0;
   display: block;

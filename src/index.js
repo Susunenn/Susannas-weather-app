@@ -48,10 +48,11 @@ function startCity(city) {
 
   function formatTime(timestamp) {
     let time = new Date(timestamp);
-    let hours = time.getHours();
-    let minutes = time.getMinutes();
 
-    return `${hours}:${minutes}`;
+    let times = `${time.getHours()}:${
+      (time.getMinutes() < 10 ? "0" : "") + time.getMinutes()
+    }`;
+    return times;
   }
 
   function searchLocation(response) {
@@ -120,10 +121,11 @@ function searchCityLocation(event) {
 
   function formatTime(timestamp) {
     let time = new Date(timestamp);
-    let hours = time.getHours();
-    let minutes = time.getMinutes();
 
-    return `${hours}:${minutes}`;
+    let times = `${time.getHours()}:${
+      (time.getMinutes() < 10 ? "0" : "") + time.getMinutes()
+    }`;
+    return times;
   }
 
   function searchLocation(response) {
