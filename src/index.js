@@ -28,13 +28,46 @@ function currentToday() {
 let currentDay = document.querySelector("#current-day");
 currentDay.innerHTML = `${currentToday()}`;
 
+function sunTime(timestamp) {
+  let sunTimes = new Date(timestamp * 1000);
+  let sunTimeElement = `${sunTimes.getHours()}:${
+    (sunTimes.getMinutes() < 10 ? "0" : "") + sunTimes.getMinutes()
+  }`;
+
+  return sunTimeElement;
+}
+
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   return days[day];
-  //Fix date
+}
+
+//Later today
+function showWeatherLaterToday(response) {
+  let weatherLaterToday = response.data.daily;
+  let weatherLaterTodayElement = document.querySelector("#weatherToday");
+  let laterTodayHTML = `<div class="row today">`;
+  weatherLaterToday.forEach(function (laterToday, index) {
+    if (index < 12) {
+      laterTodayHTML =
+        laterTodayHTML +
+        `<ul class="col-1">
+              <li>12am</li>
+              <li><img src="http://openweathermap.org/img/wn/${
+                laterToday.weather[0].icon
+              }@2x.png" alt="weather-icons" id="weather-icon" class="later-weather-icon"></img></li>    
+              <li>${Math.round(laterToday.hourly)}°</li>  
+            </ul>`;
+    }
+  });
+  laterTodayHTML = laterTodayHTML + `</div>`;
+  weatherLaterTodayElement.innerHTML = laterTodayHTML;
+
+  console.log(response.data.hourly[2].dt);
+  console.log(response.data.hourly);
 }
 
 //Later this week
@@ -76,9 +109,15 @@ function searchCityLocation(event) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&appid=${apiKey}&units=metric`;
   //let apiHourlyUrl = `https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${cityInput.value}&appid=${apiKey}&units=metric`;
 
+  function showLaterToday(coordinates) {
+    let laterTodayApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+    console.log(laterTodayApiUrl);
+
+    axios.get(laterTodayApiUrl).then(showWeatherLaterToday);
+  }
+
   function showForecast(coordinates) {
     let forecastApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-    console.log(forecastApiUrl);
 
     axios.get(forecastApiUrl).then(showWeatherForecast);
   }
@@ -107,10 +146,10 @@ function searchCityLocation(event) {
     //Fix sunset/sunrise time
 
     let sunriseElement = document.querySelector("#sunrise");
-    sunriseElement.innerHTML = `${response.data.sys.sunrise}`;
+    sunriseElement.innerHTML = `${sunTime(response.data.sys.sunrise)}`;
 
     let sunsetElement = document.querySelector("#sunset");
-    sunsetElement.innerHTML = `${response.data.sys.sunset}`;
+    sunsetElement.innerHTML = `${sunTime(response.data.sys.sunset)}`;
 
     //Add current day & time in specific location
 
@@ -130,6 +169,7 @@ function searchCityLocation(event) {
     weatherIcons.setAttribute("alt", response.data.weather[0].description);
 
     showForecast(response.data.coord);
+    showLaterToday(response.data.coord);
   }
   axios.get(apiUrl).then(searchLocation);
 
@@ -167,10 +207,10 @@ function searchingCurrentLocation() {
     )}`;
 
     let currentSunriseElement = document.querySelector("#sunrise");
-    currentSunriseElement.innerHTML = `${response.data.sys.sunrise}`;
+    currentSunriseElement.innerHTML = `${sunTime(response.data.sys.sunrise)}`;
 
     let currentSunsetElement = document.querySelector("#sunset");
-    currentSunsetElement.innerHTML = `${response.data.sys.sunset}`;
+    currentSunsetElement.innerHTML = `${sunTime(response.data.sys.sunset)}`;
 
     let currentWeatherIcons = document.querySelector("#weather-icon");
     currentWeatherIcons.setAttribute(
