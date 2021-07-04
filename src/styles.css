@@ -29,10 +29,6 @@ ul {
   list-style: none;
 }
 
-.form-label {
-  margin: 0 auto;
-}
-
 .big-container {
   max-width: 800px;
   margin: 0 auto;
@@ -51,28 +47,37 @@ ul {
   box-shadow: 10px 10px 6px 1px rgba(255, 151, 167, 0.466);
 }
 
-.today-container {
-  border: solid pink 2px;
-  background-color: rgba(248, 227, 230, 0.856);
-  text-align: center;
-  border-radius: 5px;
-  display: block;
-  padding: 10px 10px 0 10px;
-  margin: 0 auto;
-  margin-top: 10px;
-  width: 780px;
+.col-6.h1 {
+  padding-right: 0;
+  max-width: 370px;
 }
 
-.week-container {
-  border: solid pink 2px;
-  background-color: rgba(248, 227, 230, 0.856);
-  text-align: center;
-  border-radius: 5px;
-  display: block;
-  padding: 10px;
+.form-label {
   margin: 0 auto;
-  margin-top: 10px;
-  width: 780px;
+}
+
+.search-button {
+  background-color: salmon;
+  border-radius: 7px;
+  border-color: salmon;
+  padding: 5px 10px 5px 10px;
+  box-shadow: 1px 1px 4px 2px rgb(255 151 167 / 47%);
+}
+
+.search-button:hover,
+.current-location-button:hover {
+  background-color: rgb(253, 188, 181);
+  transition: all 200ms ease-in-out;
+}
+
+.current-location-button {
+  background-color: salmon;
+  border-radius: 7px;
+  position: absolute;
+  margin-left: 5px;
+  border-color: salmon;
+  padding: 5px 10px 5px 10px;
+  box-shadow: 1px 1px 4px 2px rgb(255 151 167 / 47%);
 }
 
 .weather-now {
@@ -106,6 +111,14 @@ a.fahrenheit:hover {
   text-align: center;
 }
 
+.weather-details {
+  text-align: center;
+}
+
+.col-6.sun-times {
+  text-align: center;
+}
+
 .location {
   font-size: 25px;
   font-weight: bold;
@@ -117,13 +130,37 @@ a.fahrenheit:hover {
   text-align: right;
 }
 
+.today-container {
+  border: solid pink 2px;
+  background-color: rgba(248, 227, 230, 0.856);
+  text-align: center;
+  border-radius: 5px;
+  display: block;
+  padding: 10px 10px 0 10px;
+  margin: 0 auto;
+  margin-top: 10px;
+  width: 780px;
+}
+
+.week-container {
+  border: solid pink 2px;
+  background-color: rgba(248, 227, 230, 0.856);
+  text-align: center;
+  border-radius: 5px;
+  display: block;
+  padding: 10px;
+  margin: 0 auto;
+  margin-top: 10px;
+  width: 780px;
+}
+
 .col-1 {
   padding: 0;
 }
 
 .col-2 {
   border: solid salmon 1px;
-  border-radius: 2px;
+  border-radius: 4px;
   max-width: 110px;
   padding: 0;
   display: block;
@@ -141,43 +178,6 @@ a.fahrenheit:hover {
 
 .col-3 {
   padding: 0;
-}
-
-.search-button {
-  background-color: salmon;
-  border-radius: 7px;
-  border-color: salmon;
-  padding: 5px 10px 5px 10px;
-  box-shadow: 1px 1px 4px 2px rgb(255 151 167 / 47%);
-}
-
-.search-button:hover,
-.current-location-button:hover {
-  background-color: rgb(253, 188, 181);
-  transition: all 200ms ease-in-out;
-}
-
-.current-location-button {
-  background-color: salmon;
-  border-radius: 7px;
-  position: absolute;
-  margin-left: 5px;
-  border-color: salmon;
-  padding: 5px 10px 5px 10px;
-  box-shadow: 1px 1px 4px 2px rgb(255 151 167 / 47%);
-}
-
-.weather-details {
-  text-align: center;
-}
-
-.col-6.sun-times {
-  text-align: center;
-}
-
-.col-6.h1 {
-  padding-right: 0;
-  max-width: 370px;
 }
 
 .later-weather-icon {
