@@ -138,16 +138,32 @@ a.fahrenheit:hover {
   display: flex;
 }
 
-.current-location-button {
-  background-color: blue;
-  border-radius: 7px;
-  position: absolute;
-  margin-left: 5px;
+.col-3 {
+  padding: 0;
 }
 
 .search-button {
-  background-color: red;
+  background-color: salmon;
   border-radius: 7px;
+  border-color: salmon;
+  padding: 5px 10px 5px 10px;
+  box-shadow: 1px 1px 4px 2px rgb(255 151 167 / 47%);
+}
+
+.search-button:hover,
+.current-location-button:hover {
+  background-color: rgb(253, 188, 181);
+  transition: all 200ms ease-in-out;
+}
+
+.current-location-button {
+  background-color: salmon;
+  border-radius: 7px;
+  position: absolute;
+  margin-left: 5px;
+  border-color: salmon;
+  padding: 5px 10px 5px 10px;
+  box-shadow: 1px 1px 4px 2px rgb(255 151 167 / 47%);
 }
 
 .weather-details {
@@ -156,6 +172,11 @@ a.fahrenheit:hover {
 
 .col-6.sun-times {
   text-align: center;
+}
+
+.col-6.h1 {
+  padding-right: 0;
+  max-width: 370px;
 }
 
 .later-weather-icon {

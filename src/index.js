@@ -147,8 +147,6 @@ function searchCityLocation(event) {
     let feelsLikeElement = document.querySelector("#feels-like");
     feelsLikeElement.innerHTML = `${Math.round(response.data.main.feels_like)}`;
 
-    //Fix sunset/sunrise time
-
     let sunriseElement = document.querySelector("#sunrise");
     sunriseElement.innerHTML = `${sunTime(response.data.sys.sunrise)}`;
 
@@ -156,6 +154,8 @@ function searchCityLocation(event) {
     sunsetElement.innerHTML = `${sunTime(response.data.sys.sunset)}`;
 
     //Add current day & time in specific location
+
+    console.log(response.data);
 
     //let dateElement = document.querySelector("#current-day");
     //dateElement.innerHTML = `${currentDay()}`;
