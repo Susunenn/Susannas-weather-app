@@ -12,6 +12,8 @@ h1 {
 
 h2 {
   font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 
 h3 {
@@ -100,7 +102,7 @@ a.fahrenheit:hover {
 }
 
 .weather-description {
-  margin-top: -10px;
+  text-align: center;
 }
 
 .location {
@@ -146,6 +148,14 @@ a.fahrenheit:hover {
 .search-button {
   background-color: red;
   border-radius: 7px;
+}
+
+.weather-details {
+  text-align: center;
+}
+
+.col-6.sun-times {
+  text-align: center;
 }
 
 .later-weather-icon {

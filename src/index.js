@@ -182,6 +182,18 @@ searchCity.addEventListener("submit", searchCityLocation);
 //Current location button
 
 function searchingCurrentLocation() {
+  function showLaterToday(coordinates) {
+    let laterTodayApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+
+    axios.get(laterTodayApiUrl).then(showWeatherLaterToday);
+  }
+
+  function showForecast(coordinates) {
+    let forecastApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+
+    axios.get(forecastApiUrl).then(showWeatherForecast);
+  }
+
   function searchCurrentLocation(response) {
     let currentCityLocation = document.querySelector("#current-city");
     currentCityLocation.innerHTML = `${response.data.name}, ${response.data.sys.country}`;
@@ -222,10 +234,11 @@ function searchingCurrentLocation() {
       response.data.weather[0].description
     );
 
-    showWeatherForecast();
+    showForecast(response.data.coord);
+    showLaterToday(response.data.coord);
 
     //Add correct time
-    console.log(response.data.dt);
+    //console.log(response.data.dt);
   }
 
   function showLocationTemperature(position) {
