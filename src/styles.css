@@ -7,7 +7,7 @@ h4 {
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 25px;
   margin-bottom: 0;
 }
 
@@ -27,6 +27,10 @@ h4 {
 
 ul {
   list-style: none;
+}
+
+.page {
+  background-color: rgba(255, 217, 213, 0.753);
 }
 
 .big-container {
