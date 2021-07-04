@@ -73,7 +73,7 @@ function showWeatherLaterToday(response) {
   laterTodayHTML = laterTodayHTML + `</div>`;
   weatherLaterTodayElement.innerHTML = laterTodayHTML;
 
-  console.log(response.data.hourly[0]);
+  //console.log(response.data.hourly[0]);
 }
 
 //Later this week
@@ -104,15 +104,12 @@ function showWeatherForecast(response) {
   forecastElement.innerHTML = forecastHTML;
 }
 
-//Search button
-
 let apiKey = "afacbafb576509c320fcd30e6a25dc9d";
 
-function searchCityLocation(event) {
-  event.preventDefault();
-  let cityInput = document.querySelector("#whatcity");
+//Starting city
 
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&appid=${apiKey}&units=metric`;
+function startCity(city) {
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
   function showLaterToday(coordinates) {
     let laterTodayApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
@@ -124,6 +121,14 @@ function searchCityLocation(event) {
     let forecastApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
 
     axios.get(forecastApiUrl).then(showWeatherForecast);
+  }
+
+  function formatTime(timestamp) {
+    let time = new Date(timestamp);
+    let hours = time.getHours();
+    let minutes = time.getMinutes();
+
+    return `${hours}:${minutes}`;
   }
 
   function searchLocation(response) {
@@ -153,17 +158,81 @@ function searchCityLocation(event) {
     let sunsetElement = document.querySelector("#sunset");
     sunsetElement.innerHTML = `${sunTime(response.data.sys.sunset)}`;
 
-    //Add current day & time in specific location
+    let hourElement = document.querySelector("#current-hour");
+    hourElement.innerHTML = formatTime(response.data.dt * 1000);
 
-    console.log(response.data);
+    let weatherIcons = document.querySelector("#weather-icon");
+    weatherIcons.setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+    weatherIcons.setAttribute("alt", response.data.weather[0].description);
 
-    //let dateElement = document.querySelector("#current-day");
-    //dateElement.innerHTML = `${currentDay()}`;
+    showForecast(response.data.coord);
+    showLaterToday(response.data.coord);
+  }
+  axios.get(apiUrl).then(searchLocation);
+}
 
-    //let timeElement = document.querySelector("#current-hour");
-    //timeElement.innerHTML = currentTime(response.data.dt * 1000);
+startCity("Kärkölä");
 
-    //Weather icon
+//Search button
+
+function searchCityLocation(event) {
+  event.preventDefault();
+  let cityInput = document.querySelector("#whatcity");
+
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&appid=${apiKey}&units=metric`;
+
+  function showLaterToday(coordinates) {
+    let laterTodayApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+
+    axios.get(laterTodayApiUrl).then(showWeatherLaterToday);
+  }
+
+  function showForecast(coordinates) {
+    let forecastApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+
+    axios.get(forecastApiUrl).then(showWeatherForecast);
+  }
+
+  function formatTime(timestamp) {
+    let time = new Date(timestamp);
+    let hours = time.getHours();
+    let minutes = time.getMinutes();
+
+    return `${hours}:${minutes}`;
+  }
+
+  function searchLocation(response) {
+    let searchedCityName = document.querySelector("#current-city");
+    searchedCityName.innerHTML = `${response.data.name}, ${response.data.sys.country}`;
+
+    celsius = response.data.main.temp;
+
+    let cityTemperature = document.querySelector("#numberDegrees");
+    cityTemperature.innerHTML = `${Math.round(celsius)}`;
+
+    let weatherDescriptionElement = document.querySelector("#description");
+    weatherDescriptionElement.innerHTML = `${response.data.weather[0].description}`;
+
+    let humidityElement = document.querySelector("#humidity");
+    humidityElement.innerHTML = `${response.data.main.humidity}`;
+
+    let windElement = document.querySelector("#wind");
+    windElement.innerHTML = `${Math.round(response.data.wind.speed)}`;
+
+    let feelsLikeElement = document.querySelector("#feels-like");
+    feelsLikeElement.innerHTML = `${Math.round(response.data.main.feels_like)}`;
+
+    let sunriseElement = document.querySelector("#sunrise");
+    sunriseElement.innerHTML = `${sunTime(response.data.sys.sunrise)}`;
+
+    let sunsetElement = document.querySelector("#sunset");
+    sunsetElement.innerHTML = `${sunTime(response.data.sys.sunset)}`;
+
+    let hourElement = document.querySelector("#current-hour");
+    hourElement.innerHTML = formatTime(response.data.dt * 1000);
 
     let weatherIcons = document.querySelector("#weather-icon");
     weatherIcons.setAttribute(
@@ -286,7 +355,3 @@ fahrenheitLink.addEventListener("click", showFahrenheit);
 
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", showCelsius);
-
-//Add Later today element
-
-//Add Upcoming week element
