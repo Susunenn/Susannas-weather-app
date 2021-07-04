@@ -28,85 +28,8 @@ function currentToday() {
 let currentDay = document.querySelector("#current-day");
 currentDay.innerHTML = `${currentToday()}`;
 
-function sunTime(timestamp) {
-  let sunTimes = new Date(timestamp * 1000);
-  let sunTimeElement = `${sunTimes.getHours()}:${
-    (sunTimes.getMinutes() < 10 ? "0" : "") + sunTimes.getMinutes()
-  }`;
-
-  return sunTimeElement;
-}
-
-function formatDay(timestamp) {
-  let date = new Date(timestamp * 1000);
-  let day = date.getDay();
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-  return days[day];
-}
-
-function formatHour(timestamp) {
-  let hour = new Date(timestamp * 1000);
-  let hours = `${hour.getHours()}.00`;
-
-  return hours;
-}
-
-//Later today
-function showWeatherLaterToday(response) {
-  let weatherLaterToday = response.data.hourly;
-  let weatherLaterTodayElement = document.querySelector("#weatherToday");
-  let laterTodayHTML = `<div class="row today">`;
-  weatherLaterToday.forEach(function (laterToday, index) {
-    if (index < 12) {
-      laterTodayHTML =
-        laterTodayHTML +
-        `<ul class="col-1">
-              <li class="hour">${formatHour(laterToday.dt)}</li>
-              <li><img src="http://openweathermap.org/img/wn/${
-                laterToday.weather[0].icon
-              }@2x.png" alt="weather-icons" id="weather-icon" class="later-weather-icon"></img></li>    
-              <li>${Math.round(laterToday.temp)}°</li>  
-            </ul>`;
-    }
-  });
-  laterTodayHTML = laterTodayHTML + `</div>`;
-  weatherLaterTodayElement.innerHTML = laterTodayHTML;
-
-  //console.log(response.data.hourly[0]);
-}
-
-//Later this week
-function showWeatherForecast(response) {
-  let forecast = response.data.daily;
-  let forecastElement = document.querySelector("#weatherForecast");
-  let forecastHTML = `<div class="row forecast">`;
-  forecast.forEach(function (forecastDay, index) {
-    if (index < 6) {
-      forecastHTML =
-        forecastHTML +
-        `<ul class="col-2">
-        <li class="forecast-date forecast-slot">${formatDay(
-          forecastDay.dt
-        )}</li>
-        <li class="forecast-slot"><img src="http://openweathermap.org/img/wn/${
-          forecastDay.weather[0].icon
-        }@2x.png" alt="weather-icons" id="weather-icon" class="forecast-icon"></img></li>    
-        <li class="forecast-temperature forecast-slot">${Math.round(
-          forecastDay.temp.max
-        )}° | <small class="low-temp">${Math.round(
-          forecastDay.temp.min
-        )}°</small></li>  
-      </ul>`;
-    }
-  });
-  forecastHTML = forecastHTML + `</div>`;
-  forecastElement.innerHTML = forecastHTML;
-}
-
-let apiKey = "afacbafb576509c320fcd30e6a25dc9d";
-
 //Starting city
+let apiKey = "afacbafb576509c320fcd30e6a25dc9d";
 
 function startCity(city) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -177,7 +100,6 @@ function startCity(city) {
 startCity("Kärkölä");
 
 //Search button
-
 function searchCityLocation(event) {
   event.preventDefault();
   let cityInput = document.querySelector("#whatcity");
@@ -251,7 +173,6 @@ let searchCity = document.querySelector("#cities");
 searchCity.addEventListener("submit", searchCityLocation);
 
 //Current location button
-
 function searchingCurrentLocation() {
   function showLaterToday(coordinates) {
     let laterTodayApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
@@ -307,9 +228,6 @@ function searchingCurrentLocation() {
 
     showForecast(response.data.coord);
     showLaterToday(response.data.coord);
-
-    //Add correct time
-    //console.log(response.data.dt);
   }
 
   function showLocationTemperature(position) {
@@ -355,3 +273,79 @@ fahrenheitLink.addEventListener("click", showFahrenheit);
 
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", showCelsius);
+
+//Sunrise & Sunset
+
+function sunTime(timestamp) {
+  let sunTimes = new Date(timestamp * 1000);
+  let sunTimeElement = `${sunTimes.getHours()}:${
+    (sunTimes.getMinutes() < 10 ? "0" : "") + sunTimes.getMinutes()
+  }`;
+
+  return sunTimeElement;
+}
+
+//Later today
+function formatHour(timestamp) {
+  let hour = new Date(timestamp * 1000);
+  let hours = `${hour.getHours()}.00`;
+
+  return hours;
+}
+
+function showWeatherLaterToday(response) {
+  let weatherLaterToday = response.data.hourly;
+  let weatherLaterTodayElement = document.querySelector("#weatherToday");
+  let laterTodayHTML = `<div class="row today">`;
+  weatherLaterToday.forEach(function (laterToday, index) {
+    if (index < 12) {
+      laterTodayHTML =
+        laterTodayHTML +
+        `<ul class="col-1">
+              <li class="hour">${formatHour(laterToday.dt)}</li>
+              <li><img src="http://openweathermap.org/img/wn/${
+                laterToday.weather[0].icon
+              }@2x.png" alt="weather-icons" id="weather-icon" class="later-weather-icon"></img></li>    
+              <li class="temperature">${Math.round(laterToday.temp)}°</li>  
+            </ul>`;
+    }
+  });
+  laterTodayHTML = laterTodayHTML + `</div>`;
+  weatherLaterTodayElement.innerHTML = laterTodayHTML;
+}
+
+//Later this week
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
+function showWeatherForecast(response) {
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#weatherForecast");
+  let forecastHTML = `<div class="row forecast">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<ul class="col-2">
+        <li class="forecast-date forecast-slot">${formatDay(
+          forecastDay.dt
+        )}</li>
+        <li class="forecast-slot"><img src="http://openweathermap.org/img/wn/${
+          forecastDay.weather[0].icon
+        }@2x.png" alt="weather-icons" id="weather-icon" class="forecast-icon"></img></li>    
+        <li class="forecast-temperature forecast-slot">${Math.round(
+          forecastDay.temp.max
+        )}° | <small class="low-temp">${Math.round(
+          forecastDay.temp.min
+        )}°</small></li>  
+      </ul>`;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
