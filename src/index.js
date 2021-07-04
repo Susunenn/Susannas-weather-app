@@ -45,9 +45,16 @@ function formatDay(timestamp) {
   return days[day];
 }
 
+function formatHour(timestamp) {
+  let hour = new Date(timestamp * 1000);
+  let hours = `${hour.getHours()}.00`;
+
+  return hours;
+}
+
 //Later today
 function showWeatherLaterToday(response) {
-  let weatherLaterToday = response.data.daily;
+  let weatherLaterToday = response.data.hourly;
   let weatherLaterTodayElement = document.querySelector("#weatherToday");
   let laterTodayHTML = `<div class="row today">`;
   weatherLaterToday.forEach(function (laterToday, index) {
@@ -55,19 +62,18 @@ function showWeatherLaterToday(response) {
       laterTodayHTML =
         laterTodayHTML +
         `<ul class="col-1">
-              <li>12am</li>
+              <li class="hour">${formatHour(laterToday.dt)}</li>
               <li><img src="http://openweathermap.org/img/wn/${
                 laterToday.weather[0].icon
               }@2x.png" alt="weather-icons" id="weather-icon" class="later-weather-icon"></img></li>    
-              <li>${Math.round(laterToday.hourly)}°</li>  
+              <li>${Math.round(laterToday.temp)}°</li>  
             </ul>`;
     }
   });
   laterTodayHTML = laterTodayHTML + `</div>`;
   weatherLaterTodayElement.innerHTML = laterTodayHTML;
 
-  console.log(response.data.hourly[2].dt);
-  console.log(response.data.hourly);
+  console.log(response.data.hourly[0]);
 }
 
 //Later this week
@@ -107,11 +113,9 @@ function searchCityLocation(event) {
   let cityInput = document.querySelector("#whatcity");
 
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&appid=${apiKey}&units=metric`;
-  //let apiHourlyUrl = `https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${cityInput.value}&appid=${apiKey}&units=metric`;
 
   function showLaterToday(coordinates) {
     let laterTodayApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-    console.log(laterTodayApiUrl);
 
     axios.get(laterTodayApiUrl).then(showWeatherLaterToday);
   }
@@ -172,8 +176,6 @@ function searchCityLocation(event) {
     showLaterToday(response.data.coord);
   }
   axios.get(apiUrl).then(searchLocation);
-
-  //axios.get(apiHourlyUrl).then(searchLocation);
 }
 
 let searchCity = document.querySelector("#cities");
